@@ -1,0 +1,1145 @@
+syntax = "proto3";
+
+import "google/protobuf/any.proto";
+import "types.proto";
+
+package bedrockbuf;
+option go_package = "github.com/twistedasylummc/bedrockbuf";
+
+
+message ActorEventPacket { 
+    uint64 entity_runtime_id = 1;
+    uint32 event_type = 2;
+    int32 event_data = 3;
+}
+
+message ActorPickRequestPacket { 
+    int64 entity_unique_id = 1;
+    uint32 hot_bar_slot = 2;
+    bool with_data = 3;
+}
+
+message AddActorPacket { 
+    int64 entity_unique_id = 1;
+    uint64 entity_runtime_id = 2;
+    string entity_type = 3;
+    Vector3f position = 4;
+    Vector3f velocity = 5;
+    float pitch = 6;
+    float yaw = 7;
+    float head_yaw = 8;
+    repeated Attribute attributes = 9;
+    map<uint32, google.protobuf.Any> entity_metadata = 10;
+    repeated EntityLink entity_links = 11;
+}
+
+message AddBehaviourTreePacket { 
+    string behaviour_tree = 1;
+}
+
+message AddEntityPacket { 
+    uint64 entity_network_id = 1;
+}
+
+message AddItemActorPacket { 
+    int64 entity_unique_id = 1;
+    uint64 entity_runtime_id = 2;
+    ItemInstance item = 3;
+    Vector3f position = 4;
+    Vector3f velocity = 5;
+    map<uint32, google.protobuf.Any> entity_metadata = 6;
+    bool from_fishing = 7;
+}
+
+message AddPaintingPacket { 
+    int64 entity_unique_id = 1;
+    uint64 entity_runtime_id = 2;
+    Vector3f position = 3;
+    int32 direction = 4;
+    string title = 5;
+}
+
+message AddPlayerPacket { 
+    string uuid = 1;
+    string username = 2;
+    int64 entity_unique_id = 3;
+    uint64 entity_runtime_id = 4;
+    string platform_chat_id = 5;
+    Vector3f position = 6;
+    Vector3f velocity = 7;
+    float pitch = 8;
+    float yaw = 9;
+    float head_yaw = 10;
+    ItemInstance held_item = 11;
+    map<uint32, google.protobuf.Any> entity_metadata = 12;
+    uint32 flags = 13;
+    uint32 command_permission_level = 14;
+    uint32 action_permissions = 15;
+    uint32 permission_level = 16;
+    uint32 custom_stored_permissions = 17;
+    int64 player_unique_id = 18;
+    repeated EntityLink entity_links = 19;
+    string device_id = 20;
+    int32 build_platform = 21;
+}
+
+message AddVolumeEntityPacket { 
+    uint64 entity_runtime_id = 1;
+    map<string, google.protobuf.Any> entity_metadata = 2;
+    string encoding_identifier = 3;
+    string instance_identifier = 4;
+    string engine_version = 5;
+}
+
+message AdventureSettingsPacket { 
+    uint32 flags = 1;
+    uint32 command_permission_level = 2;
+    uint32 action_permissions = 3;
+    uint32 permission_level = 4;
+    uint32 custom_stored_permissions = 5;
+    int64 player_unique_id = 6;
+}
+
+message AnimateEntityPacket { 
+    string animation = 1;
+    string next_state = 2;
+    string stop_condition = 3;
+    int32 stop_condition_version = 4;
+    string controller = 5;
+    float blend_out_time = 6;
+    repeated uint64 entity_runtime_i_ds = 7;
+}
+
+message AnimatePacket { 
+    int32 action_type = 1;
+    uint64 entity_runtime_id = 2;
+    float boat_rowing_time = 3;
+}
+
+message AnvilDamagePacket { 
+    uint32 damage = 1;
+    Vector3i anvil_position = 2;
+}
+
+message AutomationClientConnectPacket { 
+    string server_uri = 1;
+}
+
+message AvailableActorIdentifiersPacket { 
+    repeated uint32 serialised_entity_identifiers = 1;
+}
+
+message AvailableCommandsPacket { 
+    repeated Command commands = 1;
+    repeated CommandEnumConstraint constraints = 2;
+}
+
+message BiomeDefinitionListPacket { 
+    repeated uint32 serialised_biome_definitions = 1;
+}
+
+message BlockActorDataPacket { 
+    Vector3i position = 1;
+    map<string, google.protobuf.Any> nbt_data = 2;
+}
+
+message BlockEventPacket { 
+    Vector3i position = 1;
+    int32 event_type = 2;
+    int32 event_data = 3;
+}
+
+message BlockPickRequestPacket { 
+    Vector3i position = 1;
+    bool add_block_nbt = 2;
+    uint32 hot_bar_slot = 3;
+}
+
+message BookEditPacket { 
+    uint32 action_type = 1;
+    uint32 inventory_slot = 2;
+    uint32 page_number = 3;
+    uint32 secondary_page_number = 4;
+    string text = 5;
+    string photo_name = 6;
+    string title = 7;
+    string author = 8;
+    string xuid = 9;
+}
+
+message BossEventPacket { 
+    int64 boss_entity_unique_id = 1;
+    uint32 event_type = 2;
+    int64 player_unique_id = 3;
+    string boss_bar_title = 4;
+    float health_percentage = 5;
+    int32 screen_darkening = 6;
+    uint32 colour = 7;
+    uint32 overlay = 8;
+}
+
+message CameraPacket { 
+    int64 camera_entity_unique_id = 1;
+    int64 target_player_unique_id = 2;
+}
+
+message CameraShakePacket { 
+    float intensity = 1;
+    float duration = 2;
+    uint32 type = 3;
+    uint32 action = 4;
+}
+
+message ChangeDimensionPacket { 
+    int32 dimension = 1;
+    Vector3f position = 2;
+    bool respawn = 3;
+}
+
+message ChunkRadiusUpdatedPacket { 
+    int32 chunk_radius = 1;
+}
+
+message ClientBoundDebugRendererPacket { 
+    int32 type = 1;
+    string text = 2;
+    Vector3f position = 3;
+    float red = 4;
+    float green = 5;
+    float blue = 6;
+    float alpha = 7;
+    int64 duration = 8;
+}
+
+message ClientBoundMapItemDataPacket { 
+    int64 map_id = 1;
+    uint32 update_flags = 2;
+    uint32 dimension = 3;
+    bool locked_map = 4;
+    uint32 scale = 5;
+    repeated int64 maps_included_in = 6;
+    repeated MapTrackedObject tracked_objects = 7;
+    repeated MapDecoration decorations = 8;
+    int32 height = 9;
+    int32 width = 10;
+    int32 x_offset = 11;
+    int32 y_offset = 12;
+    repeated RepeatedRGBA pixels = 13;
+}
+
+message ClientCacheBlobStatusPacket { 
+    repeated uint64 miss_hashes = 1;
+    repeated uint64 hit_hashes = 2;
+}
+
+message ClientCacheMissResponsePacket { 
+    repeated CacheBlob blobs = 1;
+}
+
+message ClientCacheStatusPacket { 
+    bool enabled = 1;
+}
+
+message ClientStartItemCooldownPacket { 
+    string category = 1;
+    int32 duration = 2;
+}
+
+message ClientToServerHandshakePacket { 
+}
+
+message CodeBuilderPacket { 
+    string url = 1;
+    bool should_open_code_builder = 2;
+}
+
+message CodeBuilderSourcePacket { 
+    uint32 operation = 1;
+    uint32 category = 2;
+    repeated uint32 value = 3;
+}
+
+message CommandBlockUpdatePacket { 
+    bool block = 1;
+    Vector3i position = 2;
+    uint32 mode = 3;
+    bool needs_redstone = 4;
+    bool conditional = 5;
+    uint64 minecart_entity_runtime_id = 6;
+    string command = 7;
+    string last_output = 8;
+    string name = 9;
+    bool should_track_output = 10;
+    int32 tick_delay = 11;
+    bool execute_on_first_tick = 12;
+}
+
+message CommandOutputPacket { 
+    CommandOrigin command_origin = 1;
+    uint32 output_type = 2;
+    uint32 success_count = 3;
+    repeated CommandOutputMessage output_messages = 4;
+    string data_set = 5;
+}
+
+message CommandRequestPacket { 
+    string command_line = 1;
+    CommandOrigin command_origin = 2;
+    bool internal = 3;
+}
+
+message CompletedUsingItemPacket { 
+    int32 used_item_id = 1;
+    int32 use_method = 2;
+}
+
+message ContainerClosePacket { 
+    uint32 window_id = 1;
+    bool server_side = 2;
+}
+
+message ContainerOpenPacket { 
+    uint32 window_id = 1;
+    uint32 container_type = 2;
+    Vector3i container_position = 3;
+    int64 container_entity_unique_id = 4;
+}
+
+message ContainerSetDataPacket { 
+    uint32 window_id = 1;
+    int32 key = 2;
+    int32 value = 3;
+}
+
+message CorrectPlayerMovePredictionPacket { 
+    Vector3f position = 1;
+    Vector3f delta = 2;
+    bool on_ground = 3;
+    uint64 tick = 4;
+}
+
+message CraftingDataPacket { 
+    repeated IRecipe recipes = 1;
+    repeated PotionRecipe potion_recipes = 2;
+    repeated PotionContainerChangeRecipe potion_container_change_recipes = 3;
+    repeated MaterialReducer material_reducers = 4;
+    bool clear_recipes = 5;
+}
+
+message CraftingEventPacket { 
+    uint32 window_id = 1;
+    int32 crafting_type = 2;
+    string recipe_uuid = 3;
+    repeated ItemInstance input = 4;
+    repeated ItemInstance output = 5;
+}
+
+message CreatePhotoPacket { 
+    int64 entity_unique_id = 1;
+    string photo_name = 2;
+    string item_name = 3;
+}
+
+message CreativeContentPacket { 
+    repeated CreativeItem items = 1;
+}
+
+message DebugInfoPacket { 
+    int64 player_unique_id = 1;
+    repeated uint32 data = 2;
+}
+
+message DisconnectPacket { 
+    bool hide_disconnection_screen = 1;
+    string message = 2;
+}
+
+message EducationResourceURIPacket { 
+    EducationSharedResourceURI resource = 1;
+}
+
+message EducationSettingsPacket { 
+    string code_builder_default_uri = 1;
+    string code_builder_title = 2;
+    bool can_resize_code_builder = 3;
+    bool disable_legacy_title_bar = 4;
+    string post_process_filter = 5;
+    string screenshot_border_path = 6;
+    optional bool agent_capabilities = 7;
+    string override_uri = 8;
+    bool has_quiz = 9;
+    optional EducationExternalLinkSettings external_link_settings = 10;
+}
+
+message EmoteListPacket { 
+    uint64 player_runtime_id = 1;
+    repeated string emote_pieces = 2;
+}
+
+message EmotePacket { 
+    uint64 entity_runtime_id = 1;
+    string emote_id = 2;
+    uint32 flags = 3;
+}
+
+message EventPacket { 
+    uint64 entity_runtime_id = 1;
+    int32 event_type = 2;
+    uint32 use_player_id = 3;
+    IEventData event_data = 4;
+}
+
+message FilterTextPacket { 
+    string text = 1;
+    bool from_server = 2;
+}
+
+message GUIDataPickItemPacket { 
+    string item_name = 1;
+    string item_effects = 2;
+    int32 hot_bar_slot = 3;
+}
+
+message GameRulesChangedPacket { 
+    repeated GameRule game_rules = 1;
+}
+
+message HurtArmourPacket { 
+    int32 cause = 1;
+    int32 damage = 2;
+    int64 armour_slots = 3;
+}
+
+message InteractPacket { 
+    uint32 action_type = 1;
+    uint64 target_entity_runtime_id = 2;
+    Vector3f position = 3;
+}
+
+message InventoryContentPacket { 
+    uint32 window_id = 1;
+    repeated ItemInstance content = 2;
+}
+
+message InventorySlotPacket { 
+    uint32 window_id = 1;
+    uint32 slot = 2;
+    ItemInstance new_item = 3;
+}
+
+message InventoryTransactionPacket { 
+    int32 legacy_request_id = 1;
+    repeated LegacySetItemSlot legacy_set_item_slots = 2;
+    repeated InventoryAction actions = 3;
+    IInventoryTransactionData transaction_data = 4;
+}
+
+message ItemComponentPacket { 
+    repeated ItemComponentEntry items = 1;
+}
+
+message ItemFrameDropItemPacket { 
+    Vector3i position = 1;
+}
+
+message ItemStackRequestPacket { 
+    repeated ItemStackRequest requests = 1;
+}
+
+message ItemStackResponsePacket { 
+    repeated ItemStackResponse responses = 1;
+}
+
+message LabTablePacket { 
+    uint32 action_type = 1;
+    Vector3i position = 2;
+    uint32 reaction_type = 3;
+}
+
+message LecternUpdatePacket { 
+    uint32 page = 1;
+    uint32 page_count = 2;
+    Vector3i position = 3;
+    bool drop_book = 4;
+}
+
+message LevelChunkPacket { 
+    Vector2i position = 1;
+    uint32 sub_chunk_request_mode = 2;
+    uint32 highest_sub_chunk = 3;
+    uint32 sub_chunk_count = 4;
+    bool cache_enabled = 5;
+    repeated uint64 blob_hashes = 6;
+    repeated uint32 raw_payload = 7;
+}
+
+message LevelEventGenericPacket { 
+    int32 event_id = 1;
+    repeated uint32 serialised_event_data = 2;
+}
+
+message LevelEventPacket { 
+    int32 event_type = 1;
+    Vector3f position = 2;
+    int32 event_data = 3;
+}
+
+message LevelSoundEventPacket { 
+    uint32 sound_type = 1;
+    Vector3f position = 2;
+    int32 extra_data = 3;
+    string entity_type = 4;
+    bool baby_mob = 5;
+    bool disable_relative_volume = 6;
+}
+
+message LoginPacket { 
+    int32 client_protocol = 1;
+    repeated uint32 connection_request = 2;
+}
+
+message MapCreateLockedCopyPacket { 
+    int64 original_map_id = 1;
+    int64 new_map_id = 2;
+}
+
+message MapInfoRequestPacket { 
+    int64 map_id = 1;
+}
+
+message MobArmourEquipmentPacket { 
+    uint64 entity_runtime_id = 1;
+    ItemInstance helmet = 2;
+    ItemInstance chestplate = 3;
+    ItemInstance leggings = 4;
+    ItemInstance boots = 5;
+}
+
+message MobEffectPacket { 
+    uint64 entity_runtime_id = 1;
+    uint32 operation = 2;
+    int32 effect_type = 3;
+    int32 amplifier = 4;
+    bool particles = 5;
+    int32 duration = 6;
+}
+
+message MobEquipmentPacket { 
+    uint64 entity_runtime_id = 1;
+    ItemInstance new_item = 2;
+    uint32 inventory_slot = 3;
+    uint32 hot_bar_slot = 4;
+    uint32 window_id = 5;
+}
+
+message ModalFormRequestPacket { 
+    uint32 form_id = 1;
+    repeated uint32 form_data = 2;
+}
+
+message ModalFormResponsePacket { 
+    uint32 form_id = 1;
+    repeated uint32 response_data = 2;
+}
+
+message MotionPredictionHintsPacket { 
+    uint64 entity_runtime_id = 1;
+    Vector3f velocity = 2;
+    bool on_ground = 3;
+}
+
+message MoveActorAbsolutePacket { 
+    uint64 entity_runtime_id = 1;
+    uint32 flags = 2;
+    Vector3f position = 3;
+    Vector3f rotation = 4;
+}
+
+message MoveActorDeltaPacket { 
+    uint32 flags = 1;
+    uint64 entity_runtime_id = 2;
+    Vector3f position = 3;
+    Vector3f rotation = 4;
+}
+
+message MovePlayerPacket { 
+    uint64 entity_runtime_id = 1;
+    Vector3f position = 2;
+    float pitch = 3;
+    float yaw = 4;
+    float head_yaw = 5;
+    uint32 mode = 6;
+    bool on_ground = 7;
+    uint64 ridden_entity_runtime_id = 8;
+    int32 teleport_cause = 9;
+    int32 teleport_source_entity_type = 10;
+    uint64 tick = 11;
+}
+
+message MultiPlayerSettingsPacket { 
+    int32 action_type = 1;
+}
+
+message NPCDialoguePacket { 
+    uint64 actor_unique_id = 1;
+    int32 action_type = 2;
+    string dialogue = 3;
+    string scene_name = 4;
+    string npc_name = 5;
+    string action_json = 6;
+}
+
+message NPCRequestPacket { 
+    uint64 entity_runtime_id = 1;
+    uint32 request_type = 2;
+    string command_string = 3;
+    uint32 action_type = 4;
+    string scene_name = 5;
+}
+
+message NetworkChunkPublisherUpdatePacket { 
+    Vector3i position = 1;
+    uint32 radius = 2;
+}
+
+message NetworkSettingsPacket { 
+    uint32 compression_threshold = 1;
+}
+
+message NetworkStackLatencyPacket { 
+    int64 timestamp = 1;
+    bool needs_response = 2;
+}
+
+message OnScreenTextureAnimationPacket { 
+    int32 animation_type = 1;
+}
+
+message PacketViolationWarningPacket { 
+    int32 type = 1;
+    int32 severity = 2;
+    int32 packet_id = 3;
+    string violation_context = 4;
+}
+
+message PassengerJumpPacket { 
+    int32 jump_strength = 1;
+}
+
+message PhotoInfoRequestPacket { 
+    int64 photo_id = 1;
+}
+
+message PhotoTransferPacket { 
+    string photo_name = 1;
+    repeated uint32 photo_data = 2;
+    string book_id = 3;
+    uint32 photo_type = 4;
+    uint32 source_type = 5;
+    int64 owner_entity_unique_id = 6;
+    string new_photo_name = 7;
+}
+
+message PlaySoundPacket { 
+    string sound_name = 1;
+    Vector3f position = 2;
+    float volume = 3;
+    float pitch = 4;
+}
+
+message PlayStatusPacket { 
+    int32 status = 1;
+}
+
+message PlayerActionPacket { 
+    uint64 entity_runtime_id = 1;
+    int32 action_type = 2;
+    Vector3i block_position = 3;
+    int32 block_face = 4;
+}
+
+message PlayerArmourDamagePacket { 
+    uint32 bitset = 1;
+    int32 helmet_damage = 2;
+    int32 chestplate_damage = 3;
+    int32 leggings_damage = 4;
+    int32 boots_damage = 5;
+}
+
+message PlayerAuthInputPacket { 
+    float pitch = 1;
+    float yaw = 2;
+    Vector3f position = 3;
+    Vector2f move_vector = 4;
+    float head_yaw = 5;
+    uint64 input_data = 6;
+    uint32 input_mode = 7;
+    uint32 play_mode = 8;
+    Vector3f gaze_direction = 9;
+    uint64 tick = 10;
+    Vector3f delta = 11;
+    UseItemTransactionData item_interaction_data = 12;
+    ItemStackRequest item_stack_request = 13;
+    repeated PlayerBlockAction block_actions = 14;
+}
+
+message PlayerEnchantOptionsPacket { 
+    repeated EnchantmentOption options = 1;
+}
+
+message PlayerFogPacket { 
+    repeated string stack = 1;
+}
+
+message PlayerHotBarPacket { 
+    uint32 selected_hot_bar_slot = 1;
+    uint32 window_id = 2;
+    bool select_hot_bar_slot = 3;
+}
+
+message PlayerInputPacket { 
+    Vector2f movement = 1;
+    bool jumping = 2;
+    bool sneaking = 3;
+}
+
+message PlayerListPacket { 
+    uint32 action_type = 1;
+    repeated PlayerListEntry entries = 2;
+}
+
+message PlayerSkinPacket { 
+    string uuid = 1;
+    Skin skin = 2;
+    string new_skin_name = 3;
+    string old_skin_name = 4;
+}
+
+message PositionTrackingDBClientRequestPacket { 
+    uint32 request_action = 1;
+    int32 tracking_id = 2;
+}
+
+message PositionTrackingDBServerBroadcastPacket { 
+    uint32 broadcast_action = 1;
+    int32 tracking_id = 2;
+    repeated uint32 serialised_data = 3;
+}
+
+message PurchaseReceiptPacket { 
+    repeated string receipts = 1;
+}
+
+message RemoveActorPacket { 
+    int64 entity_unique_id = 1;
+}
+
+message RemoveEntityPacket { 
+    uint64 entity_network_id = 1;
+}
+
+message RemoveObjectivePacket { 
+    string objective_name = 1;
+}
+
+message RemoveVolumeEntityPacket { 
+    uint64 entity_runtime_id = 1;
+}
+
+message RequestChunkRadiusPacket { 
+    int32 chunk_radius = 1;
+}
+
+message ResourcePackChunkDataPacket { 
+    string uuid = 1;
+    uint32 chunk_index = 2;
+    uint64 data_offset = 3;
+    repeated uint32 data = 4;
+}
+
+message ResourcePackChunkRequestPacket { 
+    string uuid = 1;
+    uint32 chunk_index = 2;
+}
+
+message ResourcePackClientResponsePacket { 
+    uint32 response = 1;
+    repeated string packs_to_download = 2;
+}
+
+message ResourcePackDataInfoPacket { 
+    string uuid = 1;
+    uint32 data_chunk_size = 2;
+    uint32 chunk_count = 3;
+    uint64 size = 4;
+    repeated uint32 hash = 5;
+    bool premium = 6;
+    uint32 pack_type = 7;
+}
+
+message ResourcePackStackPacket { 
+    bool texture_pack_required = 1;
+    repeated StackResourcePack behaviour_packs = 2;
+    repeated StackResourcePack texture_packs = 3;
+    string base_game_version = 4;
+    repeated ExperimentData experiments = 5;
+    bool experiments_previously_toggled = 6;
+}
+
+message ResourcePacksInfoPacket { 
+    bool texture_pack_required = 1;
+    bool has_scripts = 2;
+    repeated BehaviourPackInfo behaviour_packs = 3;
+    repeated TexturePackInfo texture_packs = 4;
+    bool forcing_server_packs = 5;
+}
+
+message RespawnPacket { 
+    Vector3f position = 1;
+    uint32 state = 2;
+    uint64 entity_runtime_id = 3;
+}
+
+message ScriptCustomEventPacket { 
+    string event_name = 1;
+    repeated uint32 event_data = 2;
+}
+
+message ScriptMessagePacket { 
+    string identifier = 1;
+    repeated uint32 data = 2;
+}
+
+message ServerSettingsRequestPacket { 
+}
+
+message ServerSettingsResponsePacket { 
+    uint32 form_id = 1;
+    repeated uint32 form_data = 2;
+}
+
+message ServerToClientHandshakePacket { 
+    repeated uint32 jwt = 1;
+}
+
+message SetActorDataPacket { 
+    uint64 entity_runtime_id = 1;
+    map<uint32, google.protobuf.Any> entity_metadata = 2;
+    uint64 tick = 3;
+}
+
+message SetActorLinkPacket { 
+    EntityLink entity_link = 1;
+}
+
+message SetActorMotionPacket { 
+    uint64 entity_runtime_id = 1;
+    Vector3f velocity = 2;
+}
+
+message SetCommandsEnabledPacket { 
+    bool enabled = 1;
+}
+
+message SetDefaultGameTypePacket { 
+    int32 game_type = 1;
+}
+
+message SetDifficultyPacket { 
+    uint32 difficulty = 1;
+}
+
+message SetDisplayObjectivePacket { 
+    string display_slot = 1;
+    string objective_name = 2;
+    string display_name = 3;
+    string criteria_name = 4;
+    int32 sort_order = 5;
+}
+
+message SetHealthPacket { 
+    int32 health = 1;
+}
+
+message SetLastHurtByPacket { 
+    int32 entity_type = 1;
+}
+
+message SetLocalPlayerAsInitialisedPacket { 
+    uint64 entity_runtime_id = 1;
+}
+
+message SetPlayerGameTypePacket { 
+    int32 game_type = 1;
+}
+
+message SetScorePacket { 
+    uint32 action_type = 1;
+    repeated ScoreboardEntry entries = 2;
+}
+
+message SetScoreboardIdentityPacket { 
+    uint32 action_type = 1;
+    repeated ScoreboardIdentityEntry entries = 2;
+}
+
+message SetSpawnPositionPacket { 
+    int32 spawn_type = 1;
+    Vector3i position = 2;
+    int32 dimension = 3;
+    Vector3i spawn_position = 4;
+}
+
+message SetTimePacket { 
+    int32 time = 1;
+}
+
+message SetTitlePacket { 
+    int32 action_type = 1;
+    string text = 2;
+    int32 fade_in_duration = 3;
+    int32 remain_duration = 4;
+    int32 fade_out_duration = 5;
+    string xuid = 6;
+    string platform_online_id = 7;
+}
+
+message SettingsCommandPacket { 
+    string command_line = 1;
+    bool suppress_output = 2;
+}
+
+message ShowCreditsPacket { 
+    uint64 player_runtime_id = 1;
+    int32 status_type = 2;
+}
+
+message ShowProfilePacket { 
+    string xuid = 1;
+}
+
+message ShowStoreOfferPacket { 
+    string offer_id = 1;
+    bool show_all = 2;
+}
+
+message SimpleEventPacket { 
+    int32 event_type = 1;
+}
+
+message SimulationTypePacket { 
+    uint32 simulation_type = 1;
+}
+
+message SpawnExperienceOrbPacket { 
+    Vector3f position = 1;
+    int32 experience_amount = 2;
+}
+
+message SpawnParticleEffectPacket { 
+    uint32 dimension = 1;
+    int64 entity_unique_id = 2;
+    Vector3f position = 3;
+    string particle_name = 4;
+}
+
+message StartGamePacket { 
+    int64 entity_unique_id = 1;
+    uint64 entity_runtime_id = 2;
+    int32 player_game_mode = 3;
+    Vector3f player_position = 4;
+    float pitch = 5;
+    float yaw = 6;
+    int32 world_seed = 7;
+    int32 spawn_biome_type = 8;
+    string user_defined_biome_name = 9;
+    int32 dimension = 10;
+    int32 generator = 11;
+    int32 world_game_mode = 12;
+    int32 difficulty = 13;
+    Vector3i world_spawn = 14;
+    bool achievements_disabled = 15;
+    int32 day_cycle_lock_time = 16;
+    int32 education_edition_offer = 17;
+    bool education_features_enabled = 18;
+    string education_product_id = 19;
+    float rain_level = 20;
+    float lightning_level = 21;
+    bool confirmed_platform_locked_content = 22;
+    bool multi_player_game = 23;
+    bool lan_broadcast_enabled = 24;
+    int32 xbl_broadcast_mode = 25;
+    int32 platform_broadcast_mode = 26;
+    bool commands_enabled = 27;
+    bool texture_pack_required = 28;
+    repeated GameRule game_rules = 29;
+    repeated ExperimentData experiments = 30;
+    bool experiments_previously_toggled = 31;
+    bool bonus_chest_enabled = 32;
+    bool start_with_map_enabled = 33;
+    int32 player_permissions = 34;
+    int32 server_chunk_tick_radius = 35;
+    bool has_locked_behaviour_pack = 36;
+    bool has_locked_texture_pack = 37;
+    bool from_locked_world_template = 38;
+    bool msa_gamer_tags_only = 39;
+    bool from_world_template = 40;
+    bool world_template_settings_locked = 41;
+    bool only_spawn_v_1_villagers = 42;
+    string base_game_version = 43;
+    int32 limited_world_width = 44;
+    int32 limited_world_depth = 45;
+    bool new_nether = 46;
+    EducationSharedResourceURI education_shared_resource_uri = 47;
+    bool force_experimental_gameplay = 48;
+    string level_id = 49;
+    string world_name = 50;
+    string template_content_identity = 51;
+    bool trial = 52;
+    PlayerMovementSettings player_movement_settings = 53;
+    int64 time = 54;
+    int32 enchantment_seed = 55;
+    repeated BlockEntry blocks = 56;
+    repeated ItemEntry items = 57;
+    string multi_player_correlation_id = 58;
+    bool server_authoritative_inventory = 59;
+    string game_version = 60;
+    uint64 server_block_state_checksum = 61;
+}
+
+message StopSoundPacket { 
+    string sound_name = 1;
+    bool stop_all = 2;
+}
+
+message StructureBlockUpdatePacket { 
+    Vector3i position = 1;
+    string structure_name = 2;
+    string data_field = 3;
+    bool include_players = 4;
+    bool show_bounding_box = 5;
+    int32 structure_block_type = 6;
+    StructureSettings settings = 7;
+    int32 redstone_save_mode = 8;
+    bool should_trigger = 9;
+}
+
+message StructureTemplateDataRequestPacket { 
+    string structure_name = 1;
+    Vector3i position = 2;
+    StructureSettings settings = 3;
+    uint32 request_type = 4;
+}
+
+message StructureTemplateDataResponsePacket { 
+    string structure_name = 1;
+    bool success = 2;
+    uint32 response_type = 3;
+    map<string, google.protobuf.Any> structure_template = 4;
+}
+
+message SubChunkPacket { 
+    bool cache_enabled = 1;
+    int32 dimension = 2;
+    Vector3i position = 3;
+    repeated SubChunkEntry sub_chunk_entries = 4;
+}
+
+message SubChunkRequestPacket { 
+    int32 dimension = 1;
+    Vector3i position = 2;
+    repeated Vector3i offsets = 3;
+}
+
+message SubClientLoginPacket { 
+    repeated uint32 connection_request = 1;
+}
+
+message SyncActorPropertyPacket { 
+    map<string, google.protobuf.Any> property_data = 1;
+}
+
+message TakeItemActorPacket { 
+    uint64 item_entity_runtime_id = 1;
+    uint64 taker_entity_runtime_id = 2;
+}
+
+message TextPacket { 
+    uint32 text_type = 1;
+    bool needs_translation = 2;
+    string source_name = 3;
+    string message = 4;
+    repeated string parameters = 5;
+    string xuid = 6;
+    string platform_chat_id = 7;
+}
+
+message TickSyncPacket { 
+    int64 client_request_timestamp = 1;
+    int64 server_reception_timestamp = 2;
+}
+
+message TransferPacket { 
+    string address = 1;
+    uint32 port = 2;
+}
+
+message UpdateAttributesPacket { 
+    uint64 entity_runtime_id = 1;
+    repeated Attribute attributes = 2;
+    uint64 tick = 3;
+}
+
+message UpdateBlockPacket { 
+    Vector3i position = 1;
+    uint32 new_block_runtime_id = 2;
+    uint32 flags = 3;
+    uint32 layer = 4;
+}
+
+message UpdateBlockSyncedPacket { 
+    Vector3i position = 1;
+    uint32 new_block_runtime_id = 2;
+    uint32 flags = 3;
+    uint32 layer = 4;
+    int64 entity_unique_id = 5;
+    uint64 transition_type = 6;
+}
+
+message UpdateEquipPacket { 
+    uint32 window_id = 1;
+    uint32 window_type = 2;
+    int32 size = 3;
+    int64 entity_unique_id = 4;
+    repeated uint32 serialised_inventory_data = 5;
+}
+
+message UpdatePlayerGameTypePacket { 
+    int32 game_type = 1;
+    int64 player_unique_id = 2;
+}
+
+message UpdateSoftEnumPacket { 
+    string enum_type = 1;
+    repeated string options = 2;
+    uint32 action_type = 3;
+}
+
+message UpdateSubChunkBlocksPacket { 
+    Vector3i position = 1;
+    repeated BlockChangeEntry blocks = 2;
+    repeated BlockChangeEntry extra = 3;
+}
+
+message UpdateTradePacket { 
+    uint32 window_id = 1;
+    uint32 window_type = 2;
+    int32 size = 3;
+    int32 trade_tier = 4;
+    int64 villager_unique_id = 5;
+    int64 entity_unique_id = 6;
+    string display_name = 7;
+    bool new_trade_ui = 8;
+    bool demand_based_prices = 9;
+    repeated uint32 serialised_offers = 10;
+}

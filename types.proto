@@ -1,0 +1,836 @@
+syntax = "proto3";
+
+import "google/protobuf/any.proto";
+
+package bedrockbuf;
+option go_package = "github.com/twistedasylummc/bedrockbuf";
+
+
+message AchievementAwardedEventData { 
+    int32 achievement_id = 1;
+}
+
+message AgentCommandEventData { 
+    int32 agent_result = 1;
+    int32 data_value = 2;
+    string command = 3;
+    string data_key = 4;
+    string output = 5;
+}
+
+message Attribute { 
+    string name = 1;
+    float value = 2;
+    float max = 3;
+    float min = 4;
+    float default = 5;
+}
+
+message AutoCraftRecipeStackRequestAction { 
+    uint32 recipe_network_id = 1;
+    uint32 times_crafted = 2;
+}
+
+message BeaconPaymentStackRequestAction { 
+    int32 primary_effect = 1;
+    int32 secondary_effect = 2;
+}
+
+message BehaviourPackInfo { 
+    string uuid = 1;
+    string version = 2;
+    uint64 size = 3;
+    string content_key = 4;
+    string sub_pack_name = 5;
+    string content_identity = 6;
+    bool has_scripts = 7;
+}
+
+message BellUsedEventData { 
+    int32 item_id = 1;
+}
+
+message BlockChangeEntry { 
+    Vector3i block_pos = 1;
+    uint32 block_runtime_id = 2;
+    uint32 flags = 3;
+    uint64 synced_update_entity_unique_id = 4;
+    uint32 synced_update_type = 5;
+}
+
+message BlockEntry { 
+    string name = 1;
+    map<string, google.protobuf.Any> properties = 2;
+}
+
+message BossKilledEventData { 
+    int64 boss_entity_unique_id = 1;
+    int32 player_party_size = 2;
+    int32 interaction_entity_type = 3;
+}
+
+message CacheBlob { 
+    uint64 hash = 1;
+    repeated uint32 payload = 2;
+}
+
+message CauldronInteractEventData { 
+    int32 block_interaction_type = 1;
+    int32 item_id = 2;
+}
+
+message CauldronUsedEventData { 
+    int32 potion_id = 1;
+    int32 colour = 2;
+    int32 fill_level = 3;
+}
+
+message Command { 
+    string name = 1;
+    string description = 2;
+    uint32 flags = 3;
+    uint32 permission_level = 4;
+    repeated string aliases = 5;
+    repeated CommandOverload overloads = 6;
+}
+
+message CommandEnum { 
+    string type = 1;
+    repeated string options = 2;
+    bool dynamic = 3;
+}
+
+message CommandEnumConstraint { 
+    string enum_option = 1;
+    string enum_name = 2;
+    repeated uint32 constraints = 3;
+}
+
+message CommandOrigin { 
+    uint32 origin = 1;
+    string uuid = 2;
+    string request_id = 3;
+    int64 player_unique_id = 4;
+}
+
+message CommandOutputMessage { 
+    bool success = 1;
+    string message = 2;
+    repeated string parameters = 3;
+}
+
+message CommandOverload { 
+    repeated CommandParameter parameters = 1;
+}
+
+message CommandParameter { 
+    string name = 1;
+    uint32 type = 2;
+    bool optional = 3;
+    uint32 options = 4;
+    CommandEnum enum = 5;
+    string suffix = 6;
+}
+
+message ComposterInteractEventData { 
+    int32 block_interaction_type = 1;
+    int32 item_id = 2;
+}
+
+message ConsumeStackRequestAction { 
+    DestroyStackRequestAction destroy_stack_request_action = 1;
+}
+
+message CraftCreativeStackRequestAction { 
+    uint32 creative_item_network_id = 1;
+}
+
+message CraftGrindstoneRecipeStackRequestAction { 
+    uint32 recipe_network_id = 1;
+    int32 cost = 2;
+}
+
+message CraftLoomRecipeStackRequestAction { 
+    string pattern = 1;
+}
+
+message CraftNonImplementedStackRequestAction { 
+}
+
+message CraftRecipeOptionalStackRequestAction { 
+    int32 request_id = 1;
+    int32 filter_string_index = 2;
+}
+
+message CraftRecipeStackRequestAction { 
+    uint32 recipe_network_id = 1;
+}
+
+message CraftResultsDeprecatedStackRequestAction { 
+    repeated ItemStack result_items = 1;
+    uint32 times_crafted = 2;
+}
+
+message CreateStackRequestAction { 
+    uint32 results_slot = 1;
+}
+
+message CreativeItem { 
+    uint32 creative_item_network_id = 1;
+    ItemStack item = 2;
+}
+
+message DestroyStackRequestAction { 
+    uint32 count = 1;
+    StackRequestSlotInfo source = 2;
+}
+
+message DropStackRequestAction { 
+    uint32 count = 1;
+    StackRequestSlotInfo source = 2;
+    bool randomly = 3;
+}
+
+message EducationExternalLinkSettings { 
+    string url = 1;
+    string display_name = 2;
+}
+
+message EducationSharedResourceURI { 
+    string button_name = 1;
+    string link_uri = 2;
+}
+
+message EnchantmentInstance { 
+    uint32 type = 1;
+    uint32 level = 2;
+}
+
+message EnchantmentOption { 
+    uint32 cost = 1;
+    ItemEnchantments enchantments = 2;
+    string name = 3;
+    uint32 recipe_network_id = 4;
+}
+
+message EntityDefinitionTriggerEventData { 
+    string event_name = 1;
+}
+
+message EntityInteractEventData { 
+    int32 interaction_type = 1;
+    int32 interaction_entity_type = 2;
+    int32 entity_variant = 3;
+    uint32 entity_colour = 4;
+}
+
+message EntityLink { 
+    int64 ridden_entity_unique_id = 1;
+    int64 rider_entity_unique_id = 2;
+    uint32 type = 3;
+    bool immediate = 4;
+    bool rider_initiated = 5;
+}
+
+message ExperimentData { 
+    string name = 1;
+    bool enabled = 2;
+}
+
+message ExtractHoneyEventData { 
+}
+
+message FishBucketedEventData { 
+    int32 pattern = 1;
+    int32 preset = 2;
+    int32 bucketed_entity_type = 3;
+    bool release = 4;
+}
+
+message FurnaceDataRecipe { 
+    ItemType input_type = 1;
+    ItemStack output = 2;
+    string block = 3;
+}
+
+message FurnaceRecipe { 
+    ItemType input_type = 1;
+    ItemStack output = 2;
+    string block = 3;
+}
+
+message GameRule { 
+    string name = 1;
+    bool can_be_modified_by_player = 2;
+    google.protobuf.Any value = 3;
+}
+
+message IEventData { 
+    oneof event_data { 
+        AchievementAwardedEventData protocol_achievement_awarded_event_data = 1;
+        AgentCommandEventData protocol_agent_command_event_data = 2;
+        BellUsedEventData protocol_bell_used_event_data = 3;
+        BossKilledEventData protocol_boss_killed_event_data = 4;
+        CauldronInteractEventData protocol_cauldron_interact_event_data = 5;
+        CauldronUsedEventData protocol_cauldron_used_event_data = 6;
+        ComposterInteractEventData protocol_composter_interact_event_data = 7;
+        EntityDefinitionTriggerEventData protocol_entity_definition_trigger_event_data = 8;
+        EntityInteractEventData protocol_entity_interact_event_data = 9;
+        ExtractHoneyEventData protocol_extract_honey_event_data = 10;
+        FishBucketedEventData protocol_fish_bucketed_event_data = 11;
+        MobBornEventData protocol_mob_born_event_data = 12;
+        MobKilledEventData protocol_mob_killed_event_data = 13;
+        MovementAnomalyEventData protocol_movement_anomaly_event_data = 14;
+        MovementCorrectedEventData protocol_movement_corrected_event_data = 15;
+        PatternRemovedEventData protocol_pattern_removed_event_data = 16;
+        PetDiedEventData protocol_pet_died_event_data = 17;
+        PlayerDiedEventData protocol_player_died_event_data = 18;
+        PortalBuiltEventData protocol_portal_built_event_data = 19;
+        PortalUsedEventData protocol_portal_used_event_data = 20;
+        RaidUpdateEventData protocol_raid_update_event_data = 21;
+        SlashCommandExecutedEventData protocol_slash_command_executed_event_data = 22;
+    }
+}
+
+message IInventoryTransactionData { 
+    oneof transaction_data { 
+        MismatchTransactionData protocol_mismatch_transaction_data = 1;
+        NormalTransactionData protocol_normal_transaction_data = 2;
+        ReleaseItemTransactionData protocol_release_item_transaction_data = 3;
+        UseItemOnEntityTransactionData protocol_use_item_on_entity_transaction_data = 4;
+        UseItemTransactionData protocol_use_item_transaction_data = 5;
+    }
+}
+
+message IRecipe { 
+    oneof recipes { 
+        FurnaceDataRecipe protocol_furnace_data_recipe = 1;
+        FurnaceRecipe protocol_furnace_recipe = 2;
+        MultiRecipe protocol_multi_recipe = 3;
+        ShapedChemistryRecipe protocol_shaped_chemistry_recipe = 4;
+        ShapedRecipe protocol_shaped_recipe = 5;
+        ShapelessChemistryRecipe protocol_shapeless_chemistry_recipe = 6;
+        ShapelessRecipe protocol_shapeless_recipe = 7;
+        ShulkerBoxRecipe protocol_shulker_box_recipe = 8;
+    }
+}
+
+message IStackRequestAction { 
+    oneof actions { 
+        AutoCraftRecipeStackRequestAction protocol_auto_craft_recipe_stack_request_action = 1;
+        BeaconPaymentStackRequestAction protocol_beacon_payment_stack_request_action = 2;
+        ConsumeStackRequestAction protocol_consume_stack_request_action = 3;
+        CraftCreativeStackRequestAction protocol_craft_creative_stack_request_action = 4;
+        CraftGrindstoneRecipeStackRequestAction protocol_craft_grindstone_recipe_stack_request_action = 5;
+        CraftLoomRecipeStackRequestAction protocol_craft_loom_recipe_stack_request_action = 6;
+        CraftNonImplementedStackRequestAction protocol_craft_non_implemented_stack_request_action = 7;
+        CraftRecipeOptionalStackRequestAction protocol_craft_recipe_optional_stack_request_action = 8;
+        CraftRecipeStackRequestAction protocol_craft_recipe_stack_request_action = 9;
+        CraftResultsDeprecatedStackRequestAction protocol_craft_results_deprecated_stack_request_action = 10;
+        CreateStackRequestAction protocol_create_stack_request_action = 11;
+        DestroyStackRequestAction protocol_destroy_stack_request_action = 12;
+        DropStackRequestAction protocol_drop_stack_request_action = 13;
+        LabTableCombineStackRequestAction protocol_lab_table_combine_stack_request_action = 14;
+        MineBlockStackRequestAction protocol_mine_block_stack_request_action = 15;
+        PlaceInContainerStackRequestAction protocol_place_in_container_stack_request_action = 16;
+        PlaceStackRequestAction protocol_place_stack_request_action = 17;
+        SwapStackRequestAction protocol_swap_stack_request_action = 18;
+        TakeOutContainerStackRequestAction protocol_take_out_container_stack_request_action = 19;
+        TakeStackRequestAction protocol_take_stack_request_action = 20;
+    }
+}
+
+message InventoryAction { 
+    uint32 source_type = 1;
+    int32 window_id = 2;
+    uint32 source_flags = 3;
+    uint32 inventory_slot = 4;
+    ItemInstance old_item = 5;
+    ItemInstance new_item = 6;
+}
+
+message ItemComponentEntry { 
+    string name = 1;
+    map<string, google.protobuf.Any> data = 2;
+}
+
+message ItemEnchantments { 
+    int32 slot = 1;
+    EnchantmentInstance enchantments = 2;
+}
+
+message ItemEntry { 
+    string name = 1;
+    int32 runtime_id = 2;
+    bool component_based = 3;
+}
+
+message ItemInstance { 
+    int32 stack_network_id = 1;
+    ItemStack stack = 2;
+}
+
+message ItemStack { 
+    ItemType item_type = 1;
+    int32 block_runtime_id = 2;
+    uint32 count = 3;
+    map<string, google.protobuf.Any> nbt_data = 4;
+    repeated string can_be_placed_on = 5;
+    repeated string can_break = 6;
+    bool has_network_id = 7;
+}
+
+message ItemStackRequest { 
+    int32 request_id = 1;
+    repeated IStackRequestAction actions = 2;
+    repeated string filter_strings = 3;
+}
+
+message ItemStackResponse { 
+    uint32 status = 1;
+    int32 request_id = 2;
+    repeated StackResponseContainerInfo container_info = 3;
+}
+
+message ItemType { 
+    int32 network_id = 1;
+    uint32 metadata_value = 2;
+}
+
+message LabTableCombineStackRequestAction { 
+}
+
+message LegacySetItemSlot { 
+    uint32 container_id = 1;
+    repeated uint32 slots = 2;
+}
+
+message MapDecoration { 
+    uint32 type = 1;
+    uint32 rotation = 2;
+    uint32 x = 3;
+    uint32 y = 4;
+    string label = 5;
+    RGBA colour = 6;
+}
+
+message MapTrackedObject { 
+    int32 type = 1;
+    int64 entity_unique_id = 2;
+    Vector3i block_position = 3;
+}
+
+message MaterialReducer { 
+    ItemType input_item = 1;
+    repeated MaterialReducerOutput outputs = 2;
+}
+
+message MaterialReducerOutput { 
+    int32 network_id = 1;
+    int32 count = 2;
+}
+
+message MineBlockStackRequestAction { 
+    int32 hotbar_slot = 1;
+    int32 predicted_durability = 2;
+    int32 stack_network_id = 3;
+}
+
+message MismatchTransactionData { 
+}
+
+message MobBornEventData { 
+    int32 entity_type = 1;
+    int32 variant = 2;
+    uint32 colour = 3;
+}
+
+message MobKilledEventData { 
+    int64 killer_entity_unique_id = 1;
+    int64 victim_entity_unique_id = 2;
+    int32 killer_entity_type = 3;
+    int32 entity_damage_cause = 4;
+    int32 villager_trade_tier = 5;
+    string villager_display_name = 6;
+}
+
+message MovementAnomalyEventData { 
+    uint32 event_type = 1;
+    float cheating_score = 2;
+    float average_position_delta = 3;
+    float total_position_delta = 4;
+    float min_position_delta = 5;
+    float max_position_delta = 6;
+}
+
+message MovementCorrectedEventData { 
+    float position_delta = 1;
+    float cheating_score = 2;
+    float score_threshold = 3;
+    float distance_threshold = 4;
+    int32 duration_threshold = 5;
+}
+
+message MultiRecipe { 
+    string uuid = 1;
+    uint32 recipe_network_id = 2;
+}
+
+message NormalTransactionData { 
+}
+
+message PatternRemovedEventData { 
+    int32 item_id = 1;
+    int32 aux_value = 2;
+    int32 patterns_size = 3;
+    int32 pattern_index = 4;
+    int32 pattern_colour = 5;
+}
+
+message PersonaPiece { 
+    string piece_id = 1;
+    string piece_type = 2;
+    string pack_id = 3;
+    bool default = 4;
+    string product_id = 5;
+}
+
+message PersonaPieceTintColour { 
+    string piece_type = 1;
+    repeated string colours = 2;
+}
+
+message PetDiedEventData { 
+    bool killed_by_owner = 1;
+    int64 killer_entity_unique_id = 2;
+    int64 pet_entity_unique_id = 3;
+    int32 entity_damage_cause = 4;
+    int32 pet_entity_type = 5;
+}
+
+message PlaceInContainerStackRequestAction { 
+    TransferStackRequestAction transfer_stack_request_action = 1;
+}
+
+message PlaceStackRequestAction { 
+    TransferStackRequestAction transfer_stack_request_action = 1;
+}
+
+message PlayerBlockAction { 
+    int32 action = 1;
+    Vector3i block_pos = 2;
+    int32 face = 3;
+}
+
+message PlayerDiedEventData { 
+    int32 attacker_entity_id = 1;
+    int32 entity_damage_cause = 2;
+}
+
+message PlayerListEntry { 
+    string uuid = 1;
+    int64 entity_unique_id = 2;
+    string username = 3;
+    string xuid = 4;
+    string platform_chat_id = 5;
+    int32 build_platform = 6;
+    Skin skin = 7;
+    bool teacher = 8;
+    bool host = 9;
+}
+
+message PlayerMovementSettings { 
+    int32 movement_type = 1;
+    int32 rewind_history_size = 2;
+    bool server_authoritative_block_breaking = 3;
+}
+
+message PortalBuiltEventData { 
+    int32 dimension_id = 1;
+}
+
+message PortalUsedEventData { 
+    int32 from_dimension_id = 1;
+    int32 to_dimension_id = 2;
+}
+
+message PotionContainerChangeRecipe { 
+    int32 input_item_id = 1;
+    int32 reagent_item_id = 2;
+    int32 output_item_id = 3;
+}
+
+message PotionRecipe { 
+    int32 input_potion_id = 1;
+    int32 input_potion_metadata = 2;
+    int32 reagent_item_id = 3;
+    int32 reagent_item_metadata = 4;
+    int32 output_potion_id = 5;
+    int32 output_potion_metadata = 6;
+}
+
+message RGBA { 
+    uint32 r = 1;
+    uint32 g = 2;
+    uint32 b = 3;
+    uint32 a = 4;
+}
+
+message RaidUpdateEventData { 
+    int32 current_raid_wave = 1;
+    int32 total_raid_waves = 2;
+    bool won_raid = 3;
+}
+
+message RecipeIngredientItem { 
+    int32 network_id = 1;
+    int32 metadata_value = 2;
+    int32 count = 3;
+}
+
+message ReleaseItemTransactionData { 
+    uint32 action_type = 1;
+    int32 hot_bar_slot = 2;
+    ItemInstance held_item = 3;
+    Vector3f head_position = 4;
+}
+
+message RepeatedRGBA { 
+    repeated RGBA rgba = 1;
+}
+
+message ScoreboardEntry { 
+    int64 entry_id = 1;
+    string objective_name = 2;
+    int32 score = 3;
+    uint32 identity_type = 4;
+    int64 entity_unique_id = 5;
+    string display_name = 6;
+}
+
+message ScoreboardIdentityEntry { 
+    int64 entry_id = 1;
+    int64 entity_unique_id = 2;
+}
+
+message ShapedChemistryRecipe { 
+    string recipe_id = 1;
+    int32 width = 2;
+    int32 height = 3;
+    repeated RecipeIngredientItem input = 4;
+    repeated ItemStack output = 5;
+    string uuid = 6;
+    string block = 7;
+    int32 priority = 8;
+    uint32 recipe_network_id = 9;
+}
+
+message ShapedRecipe { 
+    string recipe_id = 1;
+    int32 width = 2;
+    int32 height = 3;
+    repeated RecipeIngredientItem input = 4;
+    repeated ItemStack output = 5;
+    string uuid = 6;
+    string block = 7;
+    int32 priority = 8;
+    uint32 recipe_network_id = 9;
+}
+
+message ShapelessChemistryRecipe { 
+    string recipe_id = 1;
+    repeated RecipeIngredientItem input = 2;
+    repeated ItemStack output = 3;
+    string uuid = 4;
+    string block = 5;
+    int32 priority = 6;
+    uint32 recipe_network_id = 7;
+}
+
+message ShapelessRecipe { 
+    string recipe_id = 1;
+    repeated RecipeIngredientItem input = 2;
+    repeated ItemStack output = 3;
+    string uuid = 4;
+    string block = 5;
+    int32 priority = 6;
+    uint32 recipe_network_id = 7;
+}
+
+message ShulkerBoxRecipe { 
+    string recipe_id = 1;
+    repeated RecipeIngredientItem input = 2;
+    repeated ItemStack output = 3;
+    string uuid = 4;
+    string block = 5;
+    int32 priority = 6;
+    uint32 recipe_network_id = 7;
+}
+
+message Skin { 
+    string skin_id = 1;
+    string play_fab_id = 2;
+    repeated uint32 skin_resource_patch = 3;
+    uint32 skin_image_width = 4;
+    uint32 skin_image_height = 5;
+    repeated uint32 skin_data = 6;
+    repeated SkinAnimation animations = 7;
+    uint32 cape_image_width = 8;
+    uint32 cape_image_height = 9;
+    repeated uint32 cape_data = 10;
+    repeated uint32 skin_geometry = 11;
+    repeated uint32 animation_data = 12;
+    repeated uint32 geometry_data_engine_version = 13;
+    bool premium_skin = 14;
+    bool persona_skin = 15;
+    bool persona_cape_on_classic_skin = 16;
+    bool primary_user = 17;
+    string cape_id = 18;
+    string full_skin_id = 19;
+    string skin_colour = 20;
+    string arm_size = 21;
+    repeated PersonaPiece persona_pieces = 22;
+    repeated PersonaPieceTintColour piece_tint_colours = 23;
+    bool trusted = 24;
+}
+
+message SkinAnimation { 
+    uint32 image_width = 1;
+    uint32 image_height = 2;
+    repeated uint32 image_data = 3;
+    uint32 animation_type = 4;
+    float frame_count = 5;
+    uint32 expression_type = 6;
+}
+
+message SlashCommandExecutedEventData { 
+    string command_name = 1;
+    int32 success_count = 2;
+    repeated string output_messages = 3;
+}
+
+message StackRequestSlotInfo { 
+    uint32 container_id = 1;
+    uint32 slot = 2;
+    int32 stack_network_id = 3;
+}
+
+message StackResourcePack { 
+    string uuid = 1;
+    string version = 2;
+    string sub_pack_name = 3;
+}
+
+message StackResponseContainerInfo { 
+    uint32 container_id = 1;
+    repeated StackResponseSlotInfo slot_info = 2;
+}
+
+message StackResponseSlotInfo { 
+    uint32 slot = 1;
+    uint32 hotbar_slot = 2;
+    uint32 count = 3;
+    int32 stack_network_id = 4;
+    string custom_name = 5;
+    int32 durability_correction = 6;
+}
+
+message StructureSettings { 
+    string palette_name = 1;
+    bool ignore_entities = 2;
+    bool ignore_blocks = 3;
+    Vector3i size = 4;
+    Vector3i offset = 5;
+    int64 last_editing_player_unique_id = 6;
+    uint32 rotation = 7;
+    uint32 mirror = 8;
+    uint32 animation_mode = 9;
+    float animation_duration = 10;
+    float integrity = 11;
+    uint32 seed = 12;
+    Vector3f pivot = 13;
+}
+
+message SubChunkEntry { 
+    Vector3i offset = 1;
+    uint32 result = 2;
+    repeated uint32 raw_payload = 3;
+    uint32 height_map_type = 4;
+    repeated uint32 height_map_data = 5;
+    uint64 blob_hash = 6;
+}
+
+message SwapStackRequestAction { 
+    StackRequestSlotInfo source = 1;
+    StackRequestSlotInfo destination = 2;
+}
+
+message TakeOutContainerStackRequestAction { 
+    TransferStackRequestAction transfer_stack_request_action = 1;
+}
+
+message TakeStackRequestAction { 
+    TransferStackRequestAction transfer_stack_request_action = 1;
+}
+
+message TexturePackInfo { 
+    string uuid = 1;
+    string version = 2;
+    uint64 size = 3;
+    string content_key = 4;
+    string sub_pack_name = 5;
+    string content_identity = 6;
+    bool has_scripts = 7;
+    bool rtx_enabled = 8;
+}
+
+message TransferStackRequestAction { 
+    uint32 count = 1;
+    StackRequestSlotInfo source = 2;
+    StackRequestSlotInfo destination = 3;
+}
+
+message UseItemOnEntityTransactionData { 
+    uint64 target_entity_runtime_id = 1;
+    uint32 action_type = 2;
+    int32 hot_bar_slot = 3;
+    ItemInstance held_item = 4;
+    Vector3f position = 5;
+    Vector3f clicked_position = 6;
+}
+
+message UseItemTransactionData { 
+    int32 legacy_request_id = 1;
+    repeated LegacySetItemSlot legacy_set_item_slots = 2;
+    repeated InventoryAction actions = 3;
+    uint32 action_type = 4;
+    Vector3i block_position = 5;
+    int32 block_face = 6;
+    int32 hot_bar_slot = 7;
+    ItemInstance held_item = 8;
+    Vector3f position = 9;
+    Vector3f clicked_position = 10;
+    uint32 block_runtime_id = 11;
+}
+
+message Vector2f { 
+    float x = 1;
+    float y = 2;
+}
+
+message Vector2i { 
+    int32 x = 1;
+    int32 y = 2;
+}
+
+message Vector3f { 
+    float x = 1;
+    float y = 2;
+    float z = 3;
+}
+
+message Vector3i { 
+    int32 x = 1;
+    int32 y = 2;
+    int32 z = 3;
+}

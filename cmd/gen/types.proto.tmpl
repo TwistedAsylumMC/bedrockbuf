@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+import "google/protobuf/any.proto";
+
+package bedrockbuf;
+option go_package = "github.com/twistedasylummc/bedrockbuf";
+
+{{ range .Messages }}
+message {{ .Name}} { {{ if eq .OneOf "" }}{{ range .Fields }}
+    {{ .Prepend }}{{ .Type }} {{ .Name }} = {{ .Index }};{{ end }}{{ else }}
+    oneof {{ .OneOf }} { {{ range .Fields }}
+        {{ .Type }} {{ .Name }} = {{ .Index }};{{ end }}
+    }{{ end }}
+}
+{{end}}

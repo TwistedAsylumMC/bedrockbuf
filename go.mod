@@ -5,6 +5,7 @@ go 1.18
 require (
 	github.com/iancoleman/strcase v0.2.0
 	github.com/sandertv/gophertunnel v1.19.6
+	google.golang.org/protobuf v1.28.0
 )
 
 require (
